@@ -28,11 +28,11 @@ win_screen db "You have won ",0
 win_screen2 db " credits!",13,10,0
 newline db " ",13,10,0
 
-sloticon0 db "??",0 ; Watermelon
-sloticon1 db "??",0 ; Bell
-sloticon2 db "??",0 ; Cherry
-sloticon3 db "??",0 ; Diamond
-sloticon4 db "??",0 ; Money Bag/Jackpot
+sloticon0 db "0",0 ; Watermelon
+sloticon1 db "1",0 ; Bell
+sloticon2 db "2",0 ; Cherry
+sloticon3 db "3",0 ; Diamond
+sloticon4 db "4",0 ; Money Bag/Jackpot
 
 divider1 db "[ ",0
 divider2 db " ] [ ",0
@@ -47,6 +47,7 @@ start:
  invoke StdOut, offset bal_screen
  call print_balance
  call game
+ exit
 
 
 game PROC
@@ -59,6 +60,7 @@ game PROC
  call spin_slots     ; Generates new values for the slot positions
  call display_slots  ; Prints the slot icons rolled to the console
  call row1_cmp       ; Checks if any row has 3 of the same icon, handles payouts
+ ret
 game ENDP
 
 display_slots PROC
@@ -298,7 +300,7 @@ row1_cmp PROC   ; not sure if make this proc or label
  mov eax, slot_1
  cmp eax, slot_2
  je eql
- jmp row2_cmp
+ jne row2_cmp
 
 eql:
  mov eax, slot_2
@@ -317,7 +319,7 @@ row2_cmp PROC
  mov eax, slot_4
  cmp eax, slot_5
  je eql
- jmp row3_cmp
+ jne row3_cmp
 
 eql:
  mov eax, slot_5
@@ -365,6 +367,7 @@ PrngGet PROC range:DWORD             ; Generate a random number in range
     ; count the number of cycles since
     ; the machine has been reset
     invoke GetTickCount
+    mul prng_a
 
     ; accumulate the value in eax and manage
     ; any carry-spill into the x state var
