@@ -28,11 +28,11 @@ win_screen db "You have won ",0
 win_screen2 db " credits!",13,10,0
 newline db " ",13,10,0
 
-sloticon0 db "??",0 ; Watermelon
-sloticon1 db "??",0 ; Bell
-sloticon2 db "??",0 ; Cherry
-sloticon3 db "??",0 ; Diamond
-sloticon4 db "??",0 ; Money Bag/Jackpot
+sloticon0 db "🍉",0 ; Watermelon
+sloticon1 db "🔔",0 ; Bell
+sloticon2 db "🍒",0 ; Cherry
+sloticon3 db "💎",0 ; Diamond
+sloticon4 db "💰",0 ; Money Bag/Jackpot
 
 divider1 db "[ ",0
 divider2 db " ] [ ",0
