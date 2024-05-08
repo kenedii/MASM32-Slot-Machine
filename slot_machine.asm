@@ -2,7 +2,7 @@ include \masm32\include\masm32rt.inc
 
 .data
 balance dd 1000
-jackpot dw 100000
+jackpot dd 100000
 payoutBuf db 32 dup (?)
 
 slot_1 dd 4 dup(?)
@@ -274,9 +274,9 @@ three:
  movzx eax, buf
  jmp end_calc_payout
 four:
- movzx eax, jackpot
+ mov eax, jackpot
  add balance, eax
- movzx eax, jackpot
+ mov eax, jackpot
 
 end_calc_payout:
  lea edi, payoutBuf
