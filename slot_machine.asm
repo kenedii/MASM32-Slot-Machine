@@ -1,7 +1,7 @@
 include \masm32\include\masm32rt.inc
 
 .data
-balance dw 1000
+balance dd 1000
 jackpot dw 100000
 payoutBuf db 32 dup (?)
 
