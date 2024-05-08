@@ -46,10 +46,14 @@ start:
  invoke StdOut, offset title_screen
  invoke StdOut, offset bal_screen
  call print_balance
+ call game
+
 
 game PROC
  invoke StdOut, offset prompt_screen
- invoke StdIn, 4, offset spinslot_buff ; Wait until user presses enter
+ push 256
+ push offset spinslot_buff
+ call StdIn          ; Wait until user presses enter
  sub balance, 5      ; Subtract cost of spin from balance when user spins slot
  invoke StdOut, offset roll_screen
  call spin_slots     ; Generates new values for the slot positions
