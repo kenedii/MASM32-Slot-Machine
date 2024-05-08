@@ -70,9 +70,10 @@ display_slots PROC
  invoke StdOut, offset divider2
  push slot_2
  call display_icon
- invoke StdOut, offset divider3
+ invoke StdOut, offset divider2
  push slot_3
  call display_icon
+ invoke StdOut, offset divider3
  
  ; Row 2
  invoke StdOut, offset divider1
@@ -81,9 +82,10 @@ display_slots PROC
  invoke StdOut, offset divider2
  push slot_5
  call display_icon
- invoke StdOut, offset divider3
+ invoke StdOut, offset divider2
  push slot_6
  call display_icon
+ invoke StdOut, offset divider3
  
  ;Row 3
  invoke StdOut, offset divider1
@@ -92,9 +94,10 @@ display_slots PROC
  invoke StdOut, offset divider2
  push slot_8
  call display_icon
- invoke StdOut, offset divider3
+ invoke StdOut, offset divider2
  push slot_9
  call display_icon
+ invoke StdOut, offset divider3
 
  ret
 display_slots ENDP
