@@ -288,12 +288,14 @@ end_calc_payout:
 calc_payout ENDP
 
 row1_cmp PROC   ; not sure if make this proc or label
- cmp slot_1, slot_2
+ mov eax, slot_1
+ cmp eax, slot_2
  je eql
  jmp row2_cmp
 
 eql:
- cmp slot_2, slot_3
+ mov eax, slot_2
+ cmp eax, slot_3
  je payout
 
 payout:
@@ -304,13 +306,15 @@ payout:
  ret 
 row1_cmp ENDP
 
-row2_cmp PROC   ; not sure if make this proc or label
- cmp slot_4, slot_5
+row2_cmp PROC
+ mov eax, slot_4
+ cmp eax, slot_5
  je eql
  jmp row3_cmp
 
 eql:
- cmp slot_5, slot_6
+ mov eax, slot_5
+ cmp eax, slot_6
  je payout
 
 payout:
@@ -321,12 +325,14 @@ payout:
  ret 
 row2_cmp ENDP
 
-row3_cmp PROC   ; not sure if make this proc or label
- cmp slot_7, slot_8
+row3_cmp PROC   
+ mov eax, slot_7
+ cmp eax, slot_8
  je eql
 
 eql:
- cmp slot_8, slot_9
+ mov eax, slot_8
+ cmp eax, slot_9
  je payout
 
 payout:
