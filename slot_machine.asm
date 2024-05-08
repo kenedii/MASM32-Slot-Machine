@@ -338,7 +338,7 @@ row3_cmp ENDP
 
 print_balance PROC
  mov print_bal_buf, 0           ; replace the balance string with zeroes
- movzx eax, balance
+ mov eax, balance
  lea edi, print_bal_buf
  call to_string                    ; Convert decimal balance to ascii string
  invoke StdOut, addr print_bal_buf ; Print the user's balance
