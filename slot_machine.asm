@@ -39,6 +39,7 @@ divider2 db " ] [ ",0
 divider3 db " ]",13,10,0
 
 buf dw 00000b
+deleteme dw 1d
 
 .code
 
@@ -139,9 +140,17 @@ spin_slots PROC
  push 99
  call PrngGet
  mov [slot_1], eax
+ mov eax, slot_1
+ lea edi, deleteme
+ call to_string
+ invoke StdOut, addr deleteme
  push 99
  call PrngGet
  mov [slot_2], eax
+ mov eax, slot_2
+ lea edi, deleteme
+ call to_string
+ invoke StdOut, addr deleteme
  push 99
  call PrngGet
  mov [slot_3], eax
@@ -169,47 +178,47 @@ spin_slots PROC
 spin_slots ENDP
 
 numberToSlots PROC
-    mov eax, OFFSET slot_1
+    mov eax, slot_1
     push eax
     call numberToSlot
     mov [slot_1], eax      ; Move the value returned by numberToSlot into slot_1
 
-    mov eax, OFFSET slot_2
+    mov eax, slot_2
     push eax
     call numberToSlot
     mov [slot_2], eax      ; Move the value returned by numberToSlot into slot_2
 
-    mov eax, OFFSET slot_3
+    mov eax, slot_3
     push eax
     call numberToSlot
     mov [slot_3], eax      ; Move the value returned by numberToSlot into slot_3
 
-    mov eax, OFFSET slot_4
+    mov eax, slot_4
     push eax
     call numberToSlot
     mov [slot_4], eax      ; Move the value returned by numberToSlot into slot_4
 
-    mov eax, OFFSET slot_5
+    mov eax, slot_5
     push eax
     call numberToSlot
     mov [slot_5], eax      ; Move the value returned by numberToSlot into slot_5
 
-    mov eax, OFFSET slot_6
+    mov eax, slot_6
     push eax
     call numberToSlot
     mov [slot_6], eax      ; Move the value returned by numberToSlot into slot_6
 
-    mov eax, OFFSET slot_7
+    mov eax, slot_7
     push eax
     call numberToSlot
     mov [slot_7], eax      ; Move the value returned by numberToSlot into slot_7
 
-    mov eax, OFFSET slot_8
+    mov eax, slot_8
     push eax
     call numberToSlot
     mov [slot_8], eax      ; Move the value returned by numberToSlot into slot_8
 
-    mov eax, OFFSET slot_9
+    mov eax, slot_9
     push eax
     call numberToSlot
     mov [slot_9], eax      ; Move the value returned by numberToSlot into slot_9
@@ -367,7 +376,6 @@ PrngGet PROC range:DWORD             ; Generate a random number in range
     ; count the number of cycles since
     ; the machine has been reset
     invoke GetTickCount
-    mul prng_a
 
     ; accumulate the value in eax and manage
     ; any carry-spill into the x state var
