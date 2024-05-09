@@ -39,16 +39,23 @@ divider2 db " ] [ ",0
 divider3 db " ]",13,10,0
 
 buf dw 00000b
-deleteme dw 1d
 
 .code
 
 start:
  invoke StdOut, offset title_screen
  invoke StdOut, offset bal_screen
- call print_balance
- call game
- exit
+ loopGame:
+  call print_balance
+  cmp balance, 5      ; Make sure user has enough money to play (more than 5 credits)
+  jge beginGame
+  jl endgame
+ beginGame:
+  call game
+  jmp loopGame
+
+ endgame:
+  exit
 
 
 game PROC
