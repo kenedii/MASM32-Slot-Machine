@@ -26,6 +26,7 @@ spinslot_buff db 256 DUP(?)
 roll_screen db "Spinning the slots!...",13,10,0
 win_screen db "You have won ",0
 win_screen2 db " credits!",13,10,0
+lose_screen db "You have ran out of money. Better luck next time!",0
 newline db " ",13,10,0
 
 sloticon0 db "0",0 ; Watermelon
@@ -43,19 +44,23 @@ buf dw 00000b
 .code
 
 start:
+
  invoke StdOut, offset title_screen
- invoke StdOut, offset bal_screen
+ 
  loopGame:
+  invoke StdOut, offset bal_screen
   call print_balance
   cmp balance, 5      ; Make sure user has enough money to play (more than 5 credits)
   jge beginGame
   jl endgame
- beginGame:
-  call game
-  jmp loopGame
+  
+  beginGame:
+   call game
+   jmp loopGame
 
- endgame:
-  exit
+  endgame:
+   invoke StdOut, offset lose_screen
+   exit
 
 
 game PROC
@@ -348,6 +353,7 @@ row3_cmp PROC
  mov eax, slot_7
  cmp eax, slot_8
  je eql
+ jne r3end
 
 eql:
  mov eax, slot_8
