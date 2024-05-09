@@ -20,7 +20,7 @@ prng_a  DD 1099433 ; current seed for RNG
 
 title_screen db "Welcome to the Slot Machine game!",13,10,0
 bal_screen db "Your current balance is: ",0
-print_bal_buf db 16 DUP(0) ; Fixed the variable name
+print_bal_buf db 16 DUP(0        ; Buffer to store the balance ascii in
 prompt_screen db "Press enter to spin the slot machine!",13,10,0
 spinslot_buff db 256 DUP(?)
 roll_screen db "Spinning the slots!...",13,10,0
