@@ -140,17 +140,9 @@ spin_slots PROC
  push 99
  call PrngGet
  mov [slot_1], eax
- mov eax, slot_1
- lea edi, deleteme
- call to_string
- invoke StdOut, addr deleteme
  push 99
  call PrngGet
  mov [slot_2], eax
- mov eax, slot_2
- lea edi, deleteme
- call to_string
- invoke StdOut, addr deleteme
  push 99
  call PrngGet
  mov [slot_3], eax
