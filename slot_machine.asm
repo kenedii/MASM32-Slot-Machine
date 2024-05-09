@@ -3,7 +3,7 @@ include \masm32\include\masm32rt.inc
 .data
 balance dd 1000
 jackpot dd 100000
-payoutBuf db 32 dup (?)
+cost_to_play dd 20
 
 slot_1 dd 4 dup(?)
 slot_2 dd 4 dup(?)
@@ -39,6 +39,7 @@ divider1 db "[ ",0
 divider2 db " ] [ ",0
 divider3 db " ]",13,10,0
 
+payoutBuf db 32 dup (?)
 buf dw 00000b
 
 .code
@@ -50,7 +51,8 @@ start:
  loopGame:
   invoke StdOut, offset bal_screen
   call print_balance
-  cmp balance, 5      ; Make sure user has enough money to play (more than 5 credits)
+  mov eax, cost_to_play
+  cmp balance, eax    ; Make sure user has enough money to play (more than 5 credits)
   jge beginGame
   jl endgame
   
@@ -68,7 +70,9 @@ game PROC
  push 256
  push offset spinslot_buff
  call StdIn          ; Wait until user presses enter
- sub balance, 5      ; Subtract cost of spin from balance when user spins slot
+ mov eax, balance
+ sub eax, cost_to_play   ; Subtract cost of spin from balance when user spins slot
+ mov [balance], eax      ; Move the result into the memory address of [balance]
  invoke StdOut, offset roll_screen
  call spin_slots     ; Generates new values for the slot positions
  call display_slots  ; Prints the slot icons rolled to the console
