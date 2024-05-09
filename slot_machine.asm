@@ -2,7 +2,7 @@ include \masm32\include\masm32rt.inc
 
 .data
 balance dd 1000
-jackpot dd 100000
+jackpot dd 1000000
 cost_to_play dd 20
 
 slot_1 dd 4 dup(?)
@@ -285,18 +285,18 @@ zero:
  movzx eax, buf
  jmp end_calc_payout
 one:
- add balance, 40
- mov buf, 40
+ add balance, 50
+ mov buf, 50
  movzx eax, buf
  jmp end_calc_payout
 two:
- add balance, 60
- mov buf, 60
+ add balance, 250
+ mov buf, 250
  movzx eax, buf
  jmp end_calc_payout
 three:
- add balance, 100
- mov buf, 100
+ add balance, 1000
+ mov buf, 1000
  movzx eax, buf
  jmp end_calc_payout
 four:
@@ -313,7 +313,7 @@ end_calc_payout:
  ret
 calc_payout ENDP
 
-row1_cmp PROC   ; not sure if make this proc or label
+row1_cmp PROC   ; Compares slot_1 with slot_2, if theyre equal compares slot_2 with slot_3, if equal payout
  mov eax, slot_1
  cmp eax, slot_2
  je eql
