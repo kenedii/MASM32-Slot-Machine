@@ -307,6 +307,7 @@ eql:
  mov eax, slot_2
  cmp eax, slot_3
  je payout
+ jne row2_cmp
 
 payout:
  push slot_1
@@ -326,6 +327,7 @@ eql:
  mov eax, slot_5
  cmp eax, slot_6
  je payout
+ jne row3_cmp
 
 payout:
  push slot_4
@@ -344,11 +346,13 @@ eql:
  mov eax, slot_8
  cmp eax, slot_9
  je payout
+ jne r3end
 
 payout:
  push slot_7
  call calc_payout  ; determine how much to payout to the user
 
+r3end:
  ret 
 row3_cmp ENDP
 
